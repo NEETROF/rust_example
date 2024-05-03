@@ -1,0 +1,44 @@
+syntax = "proto3";
+package tenant_grpc;
+
+// Request
+message GetTenantRequest {
+  string id = 1;
+}
+
+message GetTenantListRequest {
+}
+
+message CreateTenantRequest {
+  string name = 1;
+}
+
+message UpdateTenantRequest {
+  string id = 1;
+  string name = 2;
+}
+
+message DeleteTenantRequest {
+  string id = 1;
+}
+
+// Response
+message TenantResponse {
+  string id = 1;
+  string name = 2;
+}
+
+message TenantListResponse {
+  repeated TenantResponse tenants = 1;
+}
+
+message DeleteTenantResponse {
+}
+
+service TenantGrpc {
+  rpc GetTenant (GetTenantRequest) returns (TenantResponse);
+  rpc GetTenantList (GetTenantListRequest) returns (TenantListResponse);
+  rpc CreateTenant (CreateTenantRequest) returns (TenantResponse);
+  rpc UpdateTenant (UpdateTenantRequest) returns (TenantResponse);
+  rpc DeleteTenant (DeleteTenantRequest) returns (DeleteTenantResponse);
+}

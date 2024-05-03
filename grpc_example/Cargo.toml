@@ -1,0 +1,45 @@
+[package]
+name = "grpc_test"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tonic = "0.11.0"
+tonic-health = "0.11.0"
+prost = "0.12.4"
+opentelemetry = { version = "0.22", features = ["metrics"] }
+opentelemetry-semantic-conventions = "0.14.0"
+opentelemetry-otlp = { version = "0.15.0", features = [
+    "tonic",
+    "metrics",
+    "logs",
+] }
+opentelemetry-appender-log = { version = "0.3.0", default-features = false }
+tracing = { version = "0.1.40", features = [
+    "max_level_debug",
+    "release_max_level_info",
+] }
+tracing-opentelemetry = "0.23.0"
+tracing-subscriber = "0.3.18"
+serde_json = "1.0.116"
+config = "0.14.0"
+env_logger = "0.11.3"
+
+opentelemetry_sdk = { version = "0.22", features = [
+    "rt-tokio",
+    "logs",
+    "logs_level_enabled",
+] }
+tokio = { version = "1.37.0", features = ["macros"] }
+#opentelemetry-stdout = { version = "0.3.0", features = ["logs"] }
+log = "0.4.21"
+function_name = "0.3.0"
+
+[build-dependencies]
+tonic-build = "0.11.0"
+
+[[bin]] # Bin to run the Tenant gRPC server
+name = "main_grpc_server"
+path = "src/main_grpc_server.rs"
